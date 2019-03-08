@@ -56,10 +56,10 @@ UserMethod.findUser = async (userId) => {
 }
 
 UserMethod.postUser = async (user) => {
-    console.log(user)
     user._id = new mongoose.Types.ObjectId();
     user.password = await bcrypt.hash(user.password, config.saltRounds);
     const userData = new User(user);
+    console.log(user)
     const result = await userData.save();
     return result;
 }
