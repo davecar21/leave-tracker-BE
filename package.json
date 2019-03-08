@@ -1,0 +1,27 @@
+{
+  "name": "leave-tracer-be",
+  "version": "1.0.0",
+  "description": "leave-tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "leave"
+  ],
+  "author": "davecar",
+  "license": "ISC",
+  "engines": {
+    "node": "10.15.0"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.4",
+    "body-parse": "^0.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.0",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.13",
+    "morgan": "^1.9.1"
+  }
+}
