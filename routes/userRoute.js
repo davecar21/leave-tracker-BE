@@ -4,7 +4,7 @@ const auth = require('../utils/middleware/auth');
 const authAdmin = require('../utils/middleware/authAdmin');
 
 const UserModel = require('../model/userModel');
-const UserInfoModel = require('../model/userInfoModel');
+
 var _ = require('lodash');
 
 router.get('/', async (req, res) => {
@@ -34,10 +34,6 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        console.log(req.body)
-        const createUserInfo = await UserInfoModel.postUserInfo();
-        userInfoId = createUserInfo._id;
-        req.body.userInfoID = createUserInfo._id;
         const result = await UserModel.postUser(req.body);
         return res.status(200).send({
             response: 'SUCCESS',

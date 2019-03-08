@@ -14,7 +14,6 @@ const config = require('./config/config');
 // Routes
 const authRoute = require('./routes/authRoute');
 const userRoute = require('./routes/userRoute');
-const userInfoRoute = require('./routes/userInfoRoute');
 const leaveRoute = require('./routes/leaveRoute');
 
 // Middleware
@@ -30,7 +29,6 @@ app.get('/', (req, res) => {
 
 app.use('/auth', authRoute);
 app.use('/user', auth, userRoute);
-app.use('/userInfo', auth, userInfoRoute);
 app.use('/leave', auth, leaveRoute);
 
 

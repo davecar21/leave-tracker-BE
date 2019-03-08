@@ -5,18 +5,10 @@ const config = require('../config/config');
 const Schema = mongoose.Schema;
 const _ = require('lodash');
 
-const UserInfoModel = require('../model/userInfoModel');
-
 let UserMethod = {}
 
 let userSchema = new mongoose.Schema({
     _id: Schema.Types.ObjectId,
-    userInfoID: {
-        type: Schema.Types.ObjectId,
-        ref: 'UserInfo',
-        required: true,
-        unique: true
-    },
     employeeID: {
         type: String,
         required: true,
@@ -31,6 +23,19 @@ let userSchema = new mongoose.Schema({
         required: [true, 'userType is required.'],
         enum: ['admin', 'teamLead', 'teamMember'],
         default: 'teamMember'
+    },
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true,
+        default: 'default'
     },
 }, {
     timestamps: true
@@ -51,6 +56,7 @@ UserMethod.findUser = async (userId) => {
 }
 
 UserMethod.postUser = async (user) => {
+    console.log(user)
     user._id = new mongoose.Types.ObjectId();
     user.password = await bcrypt.hash(user.password, config.saltRounds);
     const userData = new User(user);
@@ -81,7 +87,7 @@ UserMethod.auth = async (user) => {
 
     const compPassword = await bcrypt.compare(user.password, authUser.password);
     if (compPassword) {
-        const payload = _.pick(authUser, ['_id', 'employeeID', 'userInfoID']);
+        const payload = _.pick(authUser, ['_id', 'employeeID']);
         const token = await jwt.sign(payload, config.secret, {
             expiresIn: 21600 // expires in 6 hours
         });
