@@ -21,9 +21,9 @@ git push --set-upstream origin master
 #Heroku cli
 heroku login
 
-heroku logs --tail --app ecommerce-be
+heroku logs --tail --app leave-tracker-be
 
-heroku restart --app ecommerce-be
+heroku restart --app leave-tracker-be
 
 
 #API response
