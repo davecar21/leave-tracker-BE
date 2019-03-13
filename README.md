@@ -1,5 +1,5 @@
 
-# Ecommerce Backend
+# Leave Tracker Backend
 
 Sample Project using Node as Backend for Leave Tracker
 
