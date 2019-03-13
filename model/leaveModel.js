@@ -2,10 +2,16 @@ const mongoose = require('../config/db');
 const config = require('../config/config');
 const Schema = mongoose.Schema;
 
+const userModel = require('./userModel');
+
 let LeaveMethod = {}
 
 let leaveSchema = new mongoose.Schema({
     _id: Schema.Types.ObjectId,
+    userID: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     leaveDate: {
         type: Date,
         required: true
@@ -21,8 +27,7 @@ let leaveSchema = new mongoose.Schema({
         enum: [4, 8]
     },
     leaveNotes: {
-        type: String,
-        required: true
+        type: String
     },
     leaveDateReturnWork: {
         type: Date,
@@ -45,7 +50,7 @@ let leaveSchema = new mongoose.Schema({
 let Leave = mongoose.model('Leave', leaveSchema);
 
 LeaveMethod.getLeave = async () => {
-    const result = await Leave.find();
+    const result = await Leave.find().populate('userID');
     return result;
 }
 

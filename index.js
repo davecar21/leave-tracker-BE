@@ -3,9 +3,10 @@ const cors = require('cors');
 var morgan = require('morgan')
 const app = express();
 
-app.use(cors())
+
 app.use(express.json());
 app.use(morgan('tiny'));
+app.use(cors());
 
 // Config
 const db = require('./config/db');
@@ -21,15 +22,15 @@ const auth = require('./utils/middleware/auth');
 
 
 //Routes
-app.get('/', (req, res) => {
+
+app.get('/', auth, (req, res) => {
     res.status(200).send({
         message: 'Leave API!'
     })
 });
 
 app.use('/auth', authRoute);
+app.use('/leave', leaveRoute);
 app.use('/user', auth, userRoute);
-app.use('/leave', auth, leaveRoute);
-
 
 app.listen(config.port, () => console.log(`Example app listening on port ${config.port}!`));

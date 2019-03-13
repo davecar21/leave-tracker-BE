@@ -87,11 +87,11 @@ UserMethod.auth = async (user) => {
 
     const compPassword = await bcrypt.compare(user.password, authUser.password);
     if (compPassword) {
-        const payload = _.pick(authUser, ['_id', 'employeeID']);
+        const payload = _.pick(authUser, ['_id', 'employeeID', 'userType', 'email', 'firstName', 'lastName']);
         const token = await jwt.sign(payload, config.secret, {
-            expiresIn: 21600 // expires in 6 hours
+            expiresIn: 21600  // expires in 6 hours
         });
-        return token;
+        return {token};
     } else {
         throw new Error('Auth failed!');
     }

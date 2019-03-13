@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const authAdmin = require('../utils/middleware/authAdmin');
+const auth = require('../utils/middleware/auth');
 const LeaveModel = require('../model/leaveModel');
 
-router.get('/', authAdmin, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const result = await LeaveModel.getLeave();
         return res.status(200).send(result);
@@ -15,8 +15,10 @@ router.get('/', authAdmin, async (req, res) => {
         });
     }
 });
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     try {
+        req.body.userID = res.locals.token._id;
+        console.log(req.body);
         const result = await LeaveModel.postLeave(req.body);
         return res.status(200).send(result);
     } catch (error) {
