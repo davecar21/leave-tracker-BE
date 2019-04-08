@@ -54,6 +54,13 @@ LeaveMethod.getLeave = async () => {
     return result;
 }
 
+LeaveMethod.getLeaveById = async (id) => {
+    const result = await Leave.find({
+        userID: id
+    }).populate('userID');
+    return result;
+}
+
 LeaveMethod.postLeave = async (leave) => {
     leave._id = new mongoose.Types.ObjectId();
     const leaveData = new Leave(leave);

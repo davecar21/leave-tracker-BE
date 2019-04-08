@@ -23,7 +23,7 @@ const auth = require('./utils/middleware/auth');
 
 //Routes
 
-app.get('/', auth, (req, res) => {
+app.get('/', (req, res) => {
     res.status(200).send({
         message: 'Leave API!'
     })
